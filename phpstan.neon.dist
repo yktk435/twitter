@@ -1,0 +1,14 @@
+# vim: set ft=yaml:
+
+parameters:
+  level: max
+  paths:
+    - app/
+  fileExtensions:
+    - php
+  excludePaths:
+    - */*.blade.php
+    - */Test/*.php
+  bootstrapFiles:
+    - vendor/autoload.php
+  ignoreErrors:

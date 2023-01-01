@@ -1,0 +1,83 @@
+{
+    "name": "crew-bit/laravel-boilerplate",
+    "type": "project",
+    "description": "Crewbit Laravel Boilerplate",
+    "require": {
+        "php": "^8.1",
+        "guzzlehttp/guzzle": "^7.0.1",
+        "laravel/framework": "^9.32",
+        "laravel/tinker": "^2.7"
+    },
+    "require-dev": {
+        "bamarni/composer-bin-plugin": "^1.5",
+        "barryvdh/laravel-debugbar": "^3.6",
+        "barryvdh/laravel-ide-helper": "^2.10",
+        "fakerphp/faker": "^1.9.1",
+        "mockery/mockery": "^1.4.4",
+        "nunomaduro/collision": "^6.1",
+        "opcodesio/log-viewer": "^1.4",
+        "phpunit/phpunit": "^9.5.8",
+        "roave/security-advisories": "dev-latest",
+        "spatie/laravel-ignition": "^1.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/"
+        },
+        "files": [
+            "app/helpers.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover --ansi"
+        ],
+        "post-install-cmd": [
+            "[ $COMPOSER_DEV_MODE -eq 0 ] || git config --local core.hooksPath .githook",
+            "[ $COMPOSER_DEV_MODE -eq 0 ] || composer bin all install --ansi"
+        ],
+        "post-update-cmd": [
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
+        ],
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "@php artisan key:generate --ansi"
+        ],
+
+        "format": "php-cs-fixer fix --ansi",
+        "format-preview": "php-cs-fixer fix --ansi --dry-run --diff --verbose",
+
+        "deploy": "dep deploy stage=prod --ansi",
+        "rollback": "dep rollback stage=prod --ansi",
+        "deploy-staging": "dep deploy stage=staging --ansi",
+        "rollback-staging": "dep rollback stage=staging --ansi"
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": []
+        },
+        "bamarni-bin": {
+            "target-directory": "tools"
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "allow-plugins": {
+            "bamarni/composer-bin-plugin": true
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
